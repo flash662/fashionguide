@@ -4,7 +4,7 @@
 
 ## 版本需求
 
-- PHP 7.0（含）以上
+- PHP 5.6（含）以上
 - Laravel 5.3（含）以上
 
 ## 安裝
@@ -18,7 +18,7 @@
     `config/app.php`
     ```php
     'providers' => [
-        \FashionGuide\Oauth2\Providers\ServiceProvider::class,
+        \FashionGuide\Oauth2\ServiceProvider::class,
     ]
     ```
     
@@ -28,10 +28,26 @@
     
     ```php
     'aliases' => [
-       'FG' => \FashionGuide\Oauth2\Facades\FashionGuide::class,
+       'FG' => \FashionGuide\Oauth2\Facade::class,
     ]
     ```
     
+## Config
+
+預設於 `.env` 取得
+
+`.env`
+
+```
+FG_CLIENT_ID=1
+FG_CLIENT_SECRET=ChfjlvqDVlpKzrKf0x7vo0h05jYkMKhs61RTGlYZ
+FG_REDIRECT_URI=http://localhost:8000/callback
+```
+
+或是 publish config 自己定義 config
+
+`php artisan vendor:publish --provider="FashionGuide\Oauth2\Providers\ServiceProvider"`
+
 ## API Document
 
 // todo
@@ -74,6 +90,3 @@ public function callback(FashionGuide $fg)
 ```
 
 ---
-
-### RequestException
-
