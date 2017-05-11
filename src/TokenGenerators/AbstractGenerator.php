@@ -7,6 +7,9 @@ use FashionGuide\Oauth2\FashionGuide;
 
 abstract class AbstractGenerator
 {
+    /**
+     * @var FashionGuide
+     */
     protected $fashionGuide;
     
     public function __construct(FashionGuide $fashionGuide)

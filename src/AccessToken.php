@@ -18,6 +18,16 @@ class AccessToken implements Jsonable
     protected $token;
 
     /**
+     * @var integer
+     */
+    protected $expireIn;
+
+    /**
+     * @var Carbon
+     */
+    protected $expireAt;
+
+    /**
      * @return string
      */
     public function getToken()
@@ -26,22 +36,12 @@ class AccessToken implements Jsonable
     }
 
     /**
-     * @var integer
-     */
-    protected $expireIn;
-
-    /**
      * @return int
      */
     public function getExpireIn()
     {
         return $this->expireIn;
     }
-
-    /**
-     * @var Carbon
-     */
-    protected $expireAt;
 
     /**
      * @return Carbon
@@ -99,11 +99,6 @@ class AccessToken implements Jsonable
         return Carbon::now()->greaterThan($this->expireAt);
     }
 
-    public function __toString()
-    {
-        return $this->getToken();
-    }
-
     public function toJson($options = 0)
     {
         return json_encode([
@@ -116,5 +111,10 @@ class AccessToken implements Jsonable
     public function hasRefreshToken()
     {
         return !empty($this->refreshToken);
+    }
+
+    public function __toString()
+    {
+        return $this->getToken();
     }
 }

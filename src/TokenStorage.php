@@ -28,11 +28,19 @@ class TokenStorage
         session([self::TOKEN_SESSION_KEY => $accessToken]);
     }
 
+    /**
+     * reset token session
+     */
     public function reset()
     {
         session()->forget(self::TOKEN_SESSION_KEY);
     }
 
+    /**
+     * determine session exists
+     * 
+     * @return bool
+     */
     public function exist()
     {
         return !empty($this->get());
