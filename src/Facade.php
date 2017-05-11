@@ -1,10 +1,10 @@
 <?php
 
-namespace FashionGuide\Oauth2\Facades;
+namespace FashionGuide\Oauth2;
 
-use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Facade as AbstractFacade;
 
-class FashionGuide extends Facade
+class Facade extends AbstractFacade
 {
     /**
      * Get the registered name of the component.

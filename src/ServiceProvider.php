@@ -1,9 +1,7 @@
 <?php
 
-namespace FashionGuide\Oauth2\Providers;
+namespace FashionGuide\Oauth2;
 
-use FashionGuide\Oauth2\FashionGuide;
-use FashionGuide\Oauth2\TokenStorage;
 use Illuminate\Support\ServiceProvider as Provider;
 
 class ServiceProvider extends Provider
@@ -11,16 +9,11 @@ class ServiceProvider extends Provider
     protected $defer = true;
     
     /**
-     * @var string
-     */
-    protected $groupName = 'fashionguide';
-
-    /**
      * @return string
      */
     protected function configPath()
     {
-        return __DIR__ . '/../../config/fashionguide.php';
+        return __DIR__ . '/../config/fashionguide.php';
     }
     
     /**
@@ -33,7 +26,7 @@ class ServiceProvider extends Provider
         $configPath = $this->configPath();
         $publishPath = config_path('fashionguide.php');
 
-        $this->publishes([$configPath => $publishPath], $this->groupName);
+        $this->publishes([$configPath => $publishPath]);
     }
 
     /**
@@ -43,7 +36,7 @@ class ServiceProvider extends Provider
      */
     public function register()
     {
-        $this->mergeConfigFrom($this->configPath(), $this->groupName);
+        $this->mergeConfigFrom($this->configPath(), 'fashionguide');
 
         $this->registerFashionGuide();
         $this->registerTokenStorage();
@@ -67,5 +60,13 @@ class ServiceProvider extends Provider
         $this->app->singleton('FG.tokenStorage', function ($app) {
             return new TokenStorage();
         });
+    }
+
+    /**
+     * @return array
+     */
+    public function provides()
+    {
+        return ['FG'];
     }
 }
